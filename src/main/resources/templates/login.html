@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="commons/fragments :: header" />
+<style>
+	.littleMargin {
+		margin-top: 10px;
+	}
+</style>
+
+<body>
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<!--nav Component-->
+		<div th:replace="commons/fragments :: nav" />
+		<!--Content Begin-->
+		<div class="container">
+			<div class="row">
+				<div class="card col-md-6 mx-auto littleMargin">
+					<div class="card-header"><h5>Login</h5></div>
+					<div class="card-body">
+						<h5 class="card-title">Enter your details</h5>
+						<form th:action="@{/login}" class="needs-validation" method="POST" novalidate>
+							<div class="form-group littleMargin">
+								<div th:if="${error}">
+									<div class="alert alert-danger" th:text="${error}"></div>
+								</div>
+								
+								<label for="username">Username:</label>
+								<input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<div class="form-group">
+								<label for="password">Password:</label>
+								<input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+							<button type="submit" class="btn btn-success" >Login</button>
+							<span><a th:href="@{/registration}">Create an account</a></span> &nbsp;&nbsp;
+							<span><a th:href="@{/forgot-password}">Forgot Password</a></span>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<hr />
+	
+	<!--End Content-->
+
+	<!--Footer Component-->
+	<div th:replace="commons/fragments :: footer" />
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+
+	<!---Script-->
+	<div th:replace="commons/fragments :: scripts" />
+	<script>
+		// Disable form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Get the forms we want to add validation styles to
+				var forms = document.getElementsByClassName('needs-validation');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+</body>
+
+</html>

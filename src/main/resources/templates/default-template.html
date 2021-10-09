@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="commons/fragments :: header" />
+	<style>
+		.littleMargin{
+			margin-top:5px;
+		}
+	</style>
+	<body>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<!--nav Component-->
+		<div th:replace="commons/fragments :: nav" />
+		<!--Content Begin-->
+		<div class="container">
+			<div class="row">
+				
+			</div>
+			<hr />
+		</div>
+		<!--End Content-->
+		
+		<!--Footer Component-->
+		<div th:replace="commons/fragments :: footer" />
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+	
+	<!---Script-->
+	<div th:replace="commons/fragments :: scripts" />
+	<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+	</body>
+</html>
+

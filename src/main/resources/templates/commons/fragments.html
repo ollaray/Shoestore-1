@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="header">
+	<title>Sporty Shoestore</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet" />
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" th:href="@{/css/animate.css}" />
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" th:href="@{/css/icomoon.css}" />
+	<!-- Ion Icon Fonts-->
+	<link rel="stylesheet" th:href="@{/css/ionicons.min.css}" />
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" th:href="@{/css/flexslider.css}">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}" />
+
+	<!-- Date Picker -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}" />
+	<!-- Flaticons  -->
+	<link rel="stylesheet" th:href="@{/fonts/flaticon/font/flaticon.css}" />
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<style>
+	.littleMargin {
+		margin-top: 15px;
+	}
+	#page{
+		background-color:rgb(248, 248, 248)
+	}
+	.pwd{
+		padding-top:15px;
+	}
+	.err{
+		color:rgb(255, 0, 0);
+	}
+	.has-error {
+    	color: red
+	}
+	.card{
+		background-color:rgb(239, 239, 239)
+	}
+</style>
+
+</head>
+<!--th:text="${#authentication.getPrincipal().getFirstName()}"-->
+<body>
+	<div th:fragment="nav">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-7 col-md-9">
+							<div id="colorlib-logo"><a th:href="@{/}">Sporty Shoes LLC</a></div>
+						</div>
+						<div class="col-sm-5 col-md-3">
+			            <form action="#" class="search-wrap">
+			               <div class="form-group">
+			                  <input type="search" class="form-control search" placeholder="Search">
+			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+			               </div>
+			            </form>
+			         </div>
+		         </div>
+					<div class="row">
+						<div class="col-sm-12 text-left menu-1">
+							<ul>
+								<li class="active"><a th:href="@{/}">Home</a></li>
+								<li class="has-dropdown">
+									<a href="#">Featured Categories</a>
+									<ul class="dropdown">
+										
+										<li><a th:href="@{/men}">Men's Collection</a></li>
+										<li><a th:href="@{/women}">Women's Collection</a></li>
+										<li><a href="#">New Arrivals</a></li>
+										<!--
+										<li><a href="product-detail.html">Product Detail</a></li>
+										<li><a href="cart.html">Shopping Cart</a></li>
+										<li><a href="checkout.html">Checkout</a></li>
+										<li><a href="order-complete.html">Order Complete</a></li>
+										<li><a href="add-to-wishlist.html">Wishlist</a></li>
+										-->
+									</ul>
+								</li>
+								
+							
+								<li class="cart"><a href="#"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li class="cart has-dropdown" sec:authorize="isAuthenticated()">
+									<a href="#">
+									  <span sec:authentication="name"></span>
+									  <i class="icon-arrow-down"></i>
+									</a>
+									<ul class="dropdown">
+										<li><a th:href="@{/myProfile}">Profile</a></li>
+										<li><a th:href="@{/logout}">Logout</a></li>
+									</ul>
+								</li>
+								
+								<li class="cart" sec:authorize="isAnonymous()">
+									<a th:href="@{/login}">Account</a>
+								</li>
+								
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="sale">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8 offset-sm-2 text-center">
+							<div class="row">
+								<div class="owl-carousel2">
+									<div class="item">
+										<div class="col">
+											<h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
+										</div>
+									</div>
+									<div class="item">
+										<div class="col">
+											<h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</nav>
+	</div>
+	<div th:fragment="footer">
+		<footer id="colorlib-footer" role="contentinfo">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col footer-col colorlib-widget">
+						<h4>About Footwear</h4>
+						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
+						<p>
+							<ul class="colorlib-social-icons">
+								<li><a href="#"><i class="icon-twitter"></i></a></li>
+								<li><a href="#"><i class="icon-facebook"></i></a></li>
+								<li><a href="#"><i class="icon-linkedin"></i></a></li>
+								<li><a href="#"><i class="icon-dribbble"></i></a></li>
+							</ul>
+						</p>
+					</div>
+					<div class="col footer-col colorlib-widget">
+						<h4>Customer Care</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#">Contact</a></li>
+								<li><a href="#">Returns/Exchange</a></li>
+								<li><a href="#">Gift Voucher</a></li>
+								<li><a href="#">Wishlist</a></li>
+								<li><a href="#">Special</a></li>
+								<li><a href="#">Customer Services</a></li>
+								<li><a href="#">Site maps</a></li>
+							</ul>
+						</p>
+					</div>
+					<div class="col footer-col colorlib-widget">
+						<h4>Information</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#">About us</a></li>
+								<li><a href="#">Delivery Information</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Support</a></li>
+								<li><a href="#">Order Tracking</a></li>
+							</ul>
+						</p>
+					</div>
+
+					<div class="col footer-col">
+						<h4>News</h4>
+						<ul class="colorlib-footer-links">
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="#">Press</a></li>
+							<li><a href="#">Exhibitions</a></li>
+						</ul>
+					</div>
+
+					<div class="col footer-col">
+						<h4>Contact Information</h4>
+						<ul class="colorlib-footer-links">
+							<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+							<li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+							<li><a href="mailto:info@yoursite.com">info@sportyshoes.com</a></li>
+							<li><a href="#"></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copy">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<p>
+							<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Shoestore
+
+</span> 
+							
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+	<div th:fragment="scripts">
+			<!-- jQuery -->
+			<script th:src="@{/js/jquery.min.js}"></script>
+		   <!-- popper -->
+		   <script th:src="@{/js/popper.min.js}"></script>
+		   <!-- bootstrap 4.1 -->
+		   <script th:src="@{/js/bootstrap.min.js}"></script>
+		   <!-- jQuery easing -->
+		   <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+			<!-- Waypoints -->
+			<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+			<!-- Flexslider -->
+			<script th:src="@{/js/jquery.flexslider-min.js}"></script>
+			<!-- Owl carousel -->
+			<script th:src="@{/js/owl.carousel.min.js}"></script>
+			<!-- Magnific Popup -->
+			<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+			<script th:src="@{/js/magnific-popup-options.js}"></script>
+			<!-- Date Picker -->
+			<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+			<!-- Stellar Parallax -->
+			<script th:src="@{/js/jquery.stellar.min.js}"></script>
+			<!-- Main -->
+			<script th:src="@{/js/main.js}"></script>
+	</div>
+</body>
+
+</html>

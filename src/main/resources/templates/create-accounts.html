@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="commons/fragments :: header" />
+<style>
+	.littleMargin {
+		margin-top: 5px;
+	}
+</style>
+
+<body>
+
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<!--nav Component-->
+		<div th:replace="commons/fragments :: nav" />
+		<!--Content Begin-->
+		<div class="container">
+			<div class="row">
+				<div class="card col-md-6 mx-auto littleMargin">
+					<div class="card-header"><h5>Account Registration</h5></div>
+					<div class="card-body">
+						<h5 class="card-title">Enter your details</h5>
+								<form th:action="@{/registration}" th:object="${userForm}" method="POST" class="needs-validation" novalidate>
+								<input type="hidden" name="id" th:value="${userForm.id}" />
+								<div class="alert alert-info" th:if="${updateUserInfo}">User info updated</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="firstName">Firstname</label>
+											<input type="text" class="form-control" name="firstname"  id="firstname"
+												th:field="*{firstname}"/>
+											<span class="has-error" th:if="${#fields.hasErrors('firstname')}"  th:errors="*{firstname}"></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										</div>
+										<div class="col-md-6">
+											<label for="lastName">Lastname</label>
+											<input type="text" class="form-control" name="lastname"  id="lastname"
+												th:field="*{lastname}"  />
+												<span class="has-error" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="email">Email *</label>
+											<input type="text" class="form-control" name="email" id="email" th:field="*{email}"
+											 />
+											 <span class="has-error" th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										</div>
+										<div class="col-md-6">
+											<label for="phone">Phone </label>
+											<input type="text" class="form-control" name="phone"  id="phone" th:field="*{phone}" 
+											 />
+											<span class="has-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="form-group">
+									<div class="row">
+										
+											<label for="address">Address</label>
+											<textarea  class="form-control" name="address"  id="address" th:field="*{address}" >
+											</textarea>
+											<span class="has-error" th:if="${#fields.hasErrors('address')}" th:errors={address}></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="username">Username</label>
+											<input type="text" class="form-control" name="username"  id="username"  th:field="*{username}" />
+											<span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										</div>
+										<div class="col-md-6">
+											<label for="password">Password</label>
+											<input type="password" class="form-control pwd" name="password" id="password"
+											th:field="*{password}"   />
+											<span class="has-error" th:if="${#fields.hasErrors('username')}"  th:errors="*{password}"></span>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">Please fill out this field.</div>
+										</div>
+									</div>
+								</div>
+								
+								<button type="submit" class="btn btn-success">Submit</button>
+								<span style="font-weight: bold;"><a th:href="@{/login}">Login</a></span>
+							</form>
+					</div>
+				</div>
+			</div>
+			<hr />
+		</div>
+		<!--End Content-->
+
+		<!--Footer Component-->
+		<div th:replace="commons/fragments :: footer" />
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+
+	<!---Script-->
+	<div th:replace="commons/fragments :: scripts" />
+	<script>
+		// Disable form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Get the forms we want to add validation styles to
+				var forms = document.getElementsByClassName('needs-validation');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+</body>
+
+</html>

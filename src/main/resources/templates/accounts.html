@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head th:replace="commons/fragments :: header" />
+	<style>
+		.littleMargin{
+			margin-top:5px;
+		}
+	</style>
+	<body>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<!--nav-->
+		<div th:replace="commons/fragments :: nav" />
+		<!--Content Begin-->
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-9 col-md-9 littleMargin">
+					<h2 class="section-headline"><span>User Account</span></h2>
+					<hr style="margin-top:0;" />
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+						<a href="#create" class="nav-link"  data-toggle="tab" th:classappend="${classActiveNewAccount}? 'active'"  >
+						<span style="color: red;">
+						Create new account
+						</span>
+						</a>
+						</li >
+						<li class="nav-item"><a href="#login" class="nav-link"   data-toggle="tab" th:classappend="${classActiveLogin}? 'active'" >
+						<span style="color: red;">Login</span></a></li>
+						<li class="nav-item" ><a href="#forgot" class="nav-link"  data-toggle="tab" th:classappend="${classActiveForgotPassword}? 'active'" >
+						<span style="color: red;">Forgot Password</span></a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane container fade" id="create" th:class="${classActiveNewAccount}? 'tab-pane container active' : 'tab-pane container fade'">
+							<div class="alert alert-info" th:if="${emailSent}">Further instructions have been sent to your email address </div>
+							
+							<form th:action="@{/create-account}" method="POST" class="needs-validation" novalidate>
+								<div class="form-group littleMargin">
+								<div class="alert alert-danger" th:if="${usernameExists}">This Username is not available!</div>
+									<label for="username">Username:</label>
+									<input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Please fill out this field.</div>
+								</div>
+								<div class="form-group littleMargin">
+									<label for="email">Email:</label>
+									<div class="alert alert-danger" th:if="${emailExists}">Email already exists!</div>
+									<input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Please fill out this field.</div>
+								</div>
+								<!--
+								<div class="form-group">
+									<label for="pwd">Password:</label>
+									<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Please fill out this field.</div>
+								</div>
+								-->
+								<button type="submit" class="btn btn-success" >Create Account</button>
+							</form>
+						</div>
+						<div class="tab-pane container fade" id="login" th:class="${classActiveLogin}? 'tab-pane container active' : 'tab-pane container fade'">
+							<form th:action="@{/login}" class="needs-validation" method="POST" novalidate>
+								<div class="form-group littleMargin">
+									<div class="alert alert-danger" th:if="${param.error != null}">Invalid Username/ or Password</div>
+									<label for="username">Username:</label>
+									<input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Please fill out this field.</div>
+								</div>
+								<div class="form-group">
+									<label for="pwd">Password:</label>
+									<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Please fill out this field.</div>
+								</div>
+								<button type="submit" class="btn btn-success" >Login</button>
+							</form>
+						</div>
+						<div class="tab-pane container fade" id="forgot" th:class="${classActiveForgotPassword}? 'tab-pane container active' : 'tab-pane container fade'">
+							<form class="needs-validation" novalidate>
+								<div class="form-group littleMargin">
+									<label for="email">Email:</label>
+									<input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Please fill out this field.</div>
+								</div>
+								<button type="submit" class="btn btn-success" >Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-3 col-md-3 littleMargin">
+					<img src="/images/item-1.jpg" class="img-responsive" width="320" />
+				</div>
+			</div>
+			<hr />
+			
+			
+		
+		</div>
+		
+		<!--End Content-->
+		
+		
+		
+		<!--Footer-->
+		<div th:replace="commons/fragments :: footer" />
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+	
+	<!---Script-->
+	<div th:replace="commons/fragments :: scripts" />
+	<script>
+// Disable form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+	</body>
+</html>
+
